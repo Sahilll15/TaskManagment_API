@@ -41,7 +41,7 @@ const deleteTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
     const { TaskID } = req.params;
-    const { title, description, deadline } = req.body;
+    const { title, description, deadline, completed } = req.body;
     try {
         const task = await Task.findById(TaskID);
         if (!task) {
@@ -50,7 +50,8 @@ const updateTask = async (req, res) => {
         const newTask = await Task.findByIdAndUpdate(TaskID, {
             title,
             description,
-            deadline
+            deadline,
+            completed
         }, { new: true });
 
         await newTask.save();
