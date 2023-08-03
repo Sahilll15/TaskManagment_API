@@ -14,7 +14,7 @@ const createTask = async (req, res) => {
             deadline
         });
         await newTask.save();
-        res.json({ messgae: "task created succesfully", task: newTask });
+        res.status(200).json({ messgae: "task created succesfully", task: newTask });
 
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -32,7 +32,7 @@ const deleteTask = async (req, res) => {
         }
         const deletedTask = await Task.findByIdAndDelete(TaskID);
 
-        res.json({ msg: "Task deleted succesfully", task: deletedTask })
+        res.status(200).json({ msg: "Task deleted succesfully", task: deletedTask })
     } catch (error) {
         res.status(500).json({ error: error.message })
         console.log(error)
@@ -55,7 +55,7 @@ const updateTask = async (req, res) => {
 
         await newTask.save();
 
-        res.json({ msg: "Task updated succesfully", task: newTask })
+        res.status(200).json({ msg: "Task updated succesfully", task: newTask })
 
     } catch (error) {
         res.status(500).json({ error: error.message })
