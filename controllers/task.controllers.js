@@ -2,15 +2,16 @@ const Task = require('../models/task.models')
 
 
 const createTask = async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, deadline } = req.body;
 
     try {
-        if (!title || !description) {
+        if (!title || !description || !deadline) {
             return res.status(400).json({ msg: "Not all fields have been entered" })
         }
         const newTask = new Task({
             title,
             description,
+            deadline
         });
         await newTask.save();
         res.json({ messgae: "task created succesfully", task: newTask });
@@ -40,7 +41,7 @@ const deleteTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
     const { TaskID } = req.params;
-    const { title, description } = req.body;
+    const { title, description, deadline } = req.body;
     try {
         const task = await Task.findById(TaskID);
         if (!task) {
@@ -49,6 +50,7 @@ const updateTask = async (req, res) => {
         const newTask = await Task.findByIdAndUpdate(TaskID, {
             title,
             description,
+            deadline
         }, { new: true });
 
         await newTask.save();
