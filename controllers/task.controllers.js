@@ -67,7 +67,7 @@ const updateTask = async (req, res) => {
 const getTask = async (req, res) => {
     try {
         const tasks = await Task.find();
-        res.json({ message: "Task fetched successfully", tasks: tasks })
+        res.status(200).json({ message: "Task fetched successfully", tasks: tasks })
     } catch (error) {
         res.status(500).json({ error: error.message })
         console.log(error)
